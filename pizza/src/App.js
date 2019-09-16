@@ -24,6 +24,7 @@ class App extends React.Component {
     }
   }
 
+  //Kosárhoz hozzáadás
   putCart = (foodname, price) => {
     const res = window.confirm('You want to put this into the cart?');
     if(!res){
@@ -45,6 +46,7 @@ class App extends React.Component {
     });
   }
 
+  //Rendelés törlése
   updateCart = (id, foodname, price) => {
     const res = window.confirm(`You want to delete this order: ${foodname}?`);
     if(!res){
@@ -54,7 +56,6 @@ class App extends React.Component {
         return item.id === id;
     });
     this.setState({pay: this.state.pay - orderItem.price});
-    console.log(orderItem);
     const filteredCart = this.state.orders.filter((item) => {
       return item.id !== id;
     });
@@ -71,26 +72,6 @@ class App extends React.Component {
   }
 
   orderFood = () => { 
-    /*fetch('http://localhost:3000/order', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        name: this.state.email,
-        location: this.state.password
-        phonenumber:
-        foodname:
-        price:
-      })
-    }).then(res => res.json())
-    .then(data => {
-      console.log(data);
-      if(data === 'error'){
-        alert('User already exists!');
-      }else{
-        alert('Successful registration!')
-        onRouteChange('login');
-      }
-    });*/
     this.onRouteChange('order');
   }
 
@@ -123,7 +104,7 @@ class App extends React.Component {
     this.setState({category: categ});
   }
 
-  //routing
+  //Routing
   onRouteChange = (route) => {
     if(route === 'signedin'){
       this.setState({isSignedIn: true});
@@ -141,7 +122,7 @@ class App extends React.Component {
     console.log(this.state.user);
   }
 
-  //spagetti
+  //Rendering
   render(){
     return(
       <div>

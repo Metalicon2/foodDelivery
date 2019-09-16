@@ -60,7 +60,7 @@ class Login extends React.Component{
 				<main className="pa4 black-80">
 				  <form className="measure">
 				    <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-				      <legend className="f2 fw6 ph0 mh0">Login</legend>
+				      <legend className="f2 fw6 ph0 mh0 pointer">Login</legend>
 				      <div className="mt3">
 				        <label className="db fw6 lh-copy f6" >Email</label>
 				        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 

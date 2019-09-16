@@ -53,9 +53,6 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/order', (req, res) => {
-	if(req.body.price > 10000){
-		throw new Error('Goodbye!');
-	}
 	knex('orders')
 	.insert({
 		name: req.body.name,
