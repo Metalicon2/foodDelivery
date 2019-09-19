@@ -10,16 +10,16 @@ const FoodList = ({foods, categoryState, route, isSignedIn, onRouteChange, putCa
 		{a}
 			{ 
 				foods.map((item, i) => {
-					if(categoryState === item.Category){
+					if(categoryState === item.category){
 						return (
 							<Food 
-							foodname= {item.Name}
-							description= {item.Description}
-							category= {item.Category}
-							price= {item.Price}
+							foodname= {item.name}
+							description= {item.description}
+							category= {item.category}
+							price= {item.price}
 							id= {item.id}
-							spicy= {item.Spicy}
-							vegatarian= {item.Vegatarian}
+							spicy= {item.spicy}
+							vegatarian= {item.vegatarian}
 							key= {i}
 							isSignedIn= {isSignedIn}
 							putCart= {putCart}

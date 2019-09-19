@@ -14,7 +14,7 @@ class Register extends React.Component{
 			return alert('Wrong format!');
 		}
 		const {onRouteChange} = this.props;
-		fetch('http://localhost:3000/register', {
+		fetch('https://shielded-falls-57477.herokuapp.com/register', {
 			method: 'post',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({

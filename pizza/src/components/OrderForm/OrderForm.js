@@ -33,7 +33,7 @@ class OrderForm extends React.Component{
 		}
 		const {onRouteChange, orders} = this.props;
 
-		fetch('http://localhost:3000/order', {
+		fetch('https://shielded-falls-57477.herokuapp.com/order', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},
 	      body: JSON.stringify({

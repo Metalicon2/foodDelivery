@@ -77,7 +77,7 @@ class App extends React.Component {
 
   //menuitems lekérése adatbázisból
   componentDidMount(){
-    fetch('http://localhost:3000/home', {
+    fetch('https://shielded-falls-57477.herokuapp.com/home', {
       method: 'get',
       headers: {'Content-Type': 'application/json'}
     })
@@ -91,10 +91,10 @@ class App extends React.Component {
 
   //ételkategóriák kiválogatása listába adatbázisból dinamikusan
   sortCategories = () => {
-    let categories1 = [this.state.foods[0].Category];
+    let categories1 = [this.state.foods[0].category];
     this.state.foods.sort((a,b) => {
-      if(a.Category.localeCompare(b.Category) !== 0){
-          categories1.push(a.Category);
+      if(a.category.localeCompare(b.category) !== 0){
+          categories1.push(a.category);
       }
     });
     this.setState({categories: categories1});

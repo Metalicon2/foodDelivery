@@ -11,13 +11,10 @@ app.use(bodyP.json());
 app.use(cors());
 
 let knex = require('knex')({
-  client: 'mysql',
-  version: '8.0',
+  client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'root',
-    password : 'admin',
-    database : 'testdb'
+    connectionString : process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
@@ -68,9 +65,14 @@ app.post('/order', (req, res) => {
 app.get('/home', (req, res) => {
 	knex.select('*').from('menuitems').then(data => {
 		res.json(data);
-	});
+	})
+	.catch(err => res.status(400).json('cannot access menuitems!'));
 });
 
-app.listen(3000, () => {
-	console.log('Server is running on port 3000...');
+app.get('/', (req, res) => {
+	res.json(`it's working!`);
+})
+
+app.listen(process.env.PORT || 3000, () => {
+	console.log(`Server is running on port ${process.env.PORT}...`);
 });
