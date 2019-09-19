@@ -82,7 +82,7 @@ class App extends React.Component {
 
   //menuitems lekérése adatbázisból
   componentDidMount(){
-    fetch('https://shielded-falls-57477.herokuapp.com/home', {
+    fetch('https://otifoodapi.herokuapp.com/home', {
       method: 'get',
       headers: {'Content-Type': 'application/json'}
     })
@@ -124,7 +124,6 @@ class App extends React.Component {
     this.setState({route: route});
     console.log(this.state.orders);
     console.log(this.state.pay);
-    console.log(this.state.user);
   }
 
   //Rendering

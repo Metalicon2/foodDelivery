@@ -22,7 +22,7 @@ class Login extends React.Component{
 			return alert('Wrong format!');
 		}
 		const {onRouteChange, loadUser} = this.props;
-		fetch('https://shielded-falls-57477.herokuapp.com/login', {
+		fetch('https://otifoodapi.herokuapp.com/login', {
 			method: 'post',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
