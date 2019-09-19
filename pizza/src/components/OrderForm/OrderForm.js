@@ -31,7 +31,7 @@ class OrderForm extends React.Component{
 		if(this.isValidForm()){
 			return alert('Wrong format!');
 		}
-		const {onRouteChange, orders} = this.props;
+		const {onRouteChange, orders, resetOrders} = this.props;
 
 		fetch('https://shielded-falls-57477.herokuapp.com/order', {
 	      method: 'post',
@@ -51,6 +51,7 @@ class OrderForm extends React.Component{
 			}else{
 				alert('Succesful order!');
 				onRouteChange('home');
+				resetOrders();
 			}
 		}
 	    );

@@ -46,6 +46,11 @@ class App extends React.Component {
     });
   }
 
+  //Kosár visszaállítása alaphelyzetbe
+  resetOrders = () => {
+    this.setState({orders: []});
+  }
+
   //Rendelés törlése
   updateCart = (id, foodname, price) => {
     const res = window.confirm(`You want to delete this order: ${foodname}?`);
@@ -140,7 +145,7 @@ class App extends React.Component {
         :
         (this.state.route === 'cart' ? <Cart orderFood={this.orderFood} updateCart={this.updateCart} orders={this.state.orders}/>
         :
-        (this.state.route === 'order' ? <OrderForm orders={this.state.orders} onRouteChange={this.onRouteChange}/>
+        (this.state.route === 'order' ? <OrderForm resetOrders={this.resetOrders} orders={this.state.orders} onRouteChange={this.onRouteChange}/>
         :
         <div>
           <Scroll>
