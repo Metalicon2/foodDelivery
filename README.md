@@ -8,3 +8,5 @@ Felhasznált technológiák:
 -Backend: Node.js
 -Frontend: React.js
 -Adatbázis: mySQL / PostgreSQL
+
+Heroku link: http://otifood.herokuapp.com/
