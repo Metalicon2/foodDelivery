@@ -89,3 +89,8 @@
   visibility: visible;
   opacity: 1;
 }
+
+.alert{
+  color: rgb(250,125,50);
+  font-style: bold;
+}

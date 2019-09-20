@@ -16,7 +16,7 @@ const Cart = ({orders, updateCart, orderFood}) => {
 	    );
   	});
 	return(
-		<div>
+		<div className="noselect">
 			<div className="pa4">
 			  <div className="overflow-auto">
 			    <table className="f6 w-80 mw6 center tc" cellSpacing="0">

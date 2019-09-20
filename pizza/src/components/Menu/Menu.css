@@ -51,3 +51,26 @@ p{
 .mymenu{
 	z-index: 1;
 }
+
+h2{
+  display: inline-block;
+}
+
+.food{
+  color: rgb(250,125,50);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.home:hover{
+  color: rgb(250,125,50);
+  font-weight: bold;
+}

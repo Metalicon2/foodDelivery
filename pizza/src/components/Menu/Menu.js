@@ -12,12 +12,14 @@ const Menu = ({onRouteChange, checkLogin, foodCategories, chooseCateg}) => {
     );
   });
   return (
-    <div>
+    <div className="noselect">
     {
     checkLogin ? 
     <header className="mymenu black-80 tc avenir pv4">
-      <h1 className="mt2 mb0 baskerville i fw1 f1">Food Delivery</h1>
-      <h2 className="mt2 mb0 f6 fw4 ttu tracked">Order. Food. Anytime.</h2>
+      <h1 className="mt2 mb0 baskerville i fw1 f-subheadline pa4 pt0 pb3">Food Delivery</h1>
+      <h2 className="mt2 mb0 f6 fw6 ttu grow tracked ma2">Order.</h2>
+      <h2 className="food mt2 mb0 f4 fw6 ttu tracked grow baskerville i pointer ma2" onClick={(event) => {chooseCateg('Pizza'); onRouteChange('category');}} >Food.</h2>
+      <h2 className="mt2 mb0 f6 fw6 ttu grow tracked ma2">Anytime.</h2>
       <nav className="bt bb tc mw7 center mt4">
         <p onClick={() => onRouteChange('home')} className="f6 f5-l link bg-animate black-80 hover-bg-black hover-white dib pa3 ph4-l pointer">Home</p>
         <div className="dropdown">
@@ -37,8 +39,10 @@ const Menu = ({onRouteChange, checkLogin, foodCategories, chooseCateg}) => {
       </nav>
     </header> : 
     <header className="mymenu black-80 tc avenir pv4">
-      <h1 className="mt2 mb0 baskerville i fw1 f1">Food Delivery</h1>
-      <h2 className="mt2 mb0 f6 fw4 ttu tracked">Order. Food. Anytime.</h2>
+      <h1 className="mt2 mb0 baskerville i fw1 f-subheadline pa4 pt0 pb3">Food Delivery</h1>
+      <h2 className="mt2 mb0 f6 fw6 ttu grow tracked ma2">Order.</h2>
+      <h2 className="food mt2 mb0 f4 fw6 ttu tracked grow baskerville i pointer ma2" onClick={(event) => {chooseCateg('Pizza'); onRouteChange('category');}} >Food.</h2>
+      <h2 className="mt2 mb0 f6 fw6 ttu grow tracked ma2">Anytime.</h2>
       <nav className="bt bb tc mw7 center mt4">
         <p onClick={() => onRouteChange('home')} className="f6 f5-l link bg-animate black-80 hover-bg-black hover-white dib pa3 ph4-l pointer">Home</p>
         <div className="dropdown">
