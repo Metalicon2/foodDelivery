@@ -4,7 +4,7 @@ import FoodCard from './FoodCard';
 
 const Food = ({foodname, description, category, price, isSignedIn, putCart, id, spicy, vegatarian}) => {
 	if(description === '' || description === null){
-		description = '';
+		description = 'nem érhető el leírás!';
 	}
 	switch(category){
 		case 'Starter' : 
@@ -42,7 +42,7 @@ const Food = ({foodname, description, category, price, isSignedIn, putCart, id, 
 				description={description}
 				price={price}
 				isSignedIn= {isSignedIn}
-				src='https://i.pinimg.com/originals/bb/e6/76/bbe67611ceb603b9a45066bc559d2906.png'
+				src='https://previews.123rf.com/images/olegtoka/olegtoka1805/olegtoka180500013/100817448-illustration-of-traditional-goulash-meat-dish-in-plate-.jpg'
 				putCart={putCart}
 				id={id}
 				spicy={spicy}
@@ -84,7 +84,7 @@ const Food = ({foodname, description, category, price, isSignedIn, putCart, id, 
 				description={description}
 				price={price}
 				isSignedIn= {isSignedIn}
-				src='https://previews.123rf.com/images/petitelili/petitelili1611/petitelili161100130/68571256-vector-cartoon-illustration-with-isolated-hand-drawn-cute-orange-exotic-cocktail-with-umbrella-vecto.jpg'
+				src='https://st2.depositphotos.com/6836544/11719/v/950/depositphotos_117192810-stock-illustration-drink-can-icon.jpg'
 				putCart={putCart}
 				id={id}
 				spicy={spicy}

@@ -4,12 +4,14 @@ import { InlineIcon } from '@iconify/react';
 import alertIcon from '@iconify/icons-mdi/alert';
 import greenSalad from '@iconify/icons-emojione/green-salad';
 
-
+const myFunc = () => {
+	alert('A rendeléshez be kell jelentkezned!')
+}
 
 const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, spicy, vegatarian}) => {
 
 	return (
-		<div id='grow' className='baskerville dib bg-light-gray tc br3 ma2 bw2 shadow-3'>
+		<div id='grow' className='dib tc br3 ma2 bw2 shadow-3'>
 			<div className="container">
 				<img src={src}
 				width='200px' height='auto' alt="Avatar" className="image"/>
@@ -19,7 +21,7 @@ const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, s
 			</div>
 			{	
 					spicy === 1 && vegatarian === 1 ? 
-					<h3 className='tooltip b baskerville fw9 f4 pointer'> {foodname} 
+					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
 						<InlineIcon color='red' icon={alertIcon} />
 						<InlineIcon color='red' icon={greenSalad} />  
 							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
@@ -27,22 +29,22 @@ const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, s
 				:
 				(
 					spicy === 1 ?
-					<h3 className='tooltip b baskerville fw9 f4 pointer'> {foodname} 
+					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
 						<InlineIcon color='red' icon={alertIcon} />
 							<span className="tooltiptext f5">Fűszeres!</span>
 					</h3>
 				:
 				(
 					vegatarian === 1 ?
-					<h3 className='tooltip b baskerville fw9 f4 pointer'> {foodname} 
+					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
 						<InlineIcon color='red' icon={greenSalad} />
 							<span className="tooltiptext f5">Vegetáriánus!</span>
 					</h3>
 				:
-					<h3 className='b baskerville fw9 f4 pointer'> {foodname} </h3>
+					<h3 className='b fw9 f4 pointer' onClick={myFunc}> {foodname} </h3>
 				)) 
 			}
-			<p className='pa2'> {`${price} Ft`} </p>
+			<p className='price pa2'> {`${price} Ft`} </p>
 			{
 				isSignedIn ? <button onClick={() => putCart(foodname, price)} className='f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black pointer ma2'> Cart </button> : console.log('')
 			}

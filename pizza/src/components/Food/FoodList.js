@@ -4,7 +4,7 @@ import './Food.css';
 
 const FoodList = ({foods, categoryState, route, isSignedIn, onRouteChange, putCart}) => {
 	console.log(categoryState);
-	const a = isSignedIn ? console.log('') : <p onClick={() => onRouteChange('login')} className='alert pointer grow pa3 mb4 ma1 f4'>A rendeléshez be kell jelentkezned!</p>;
+	const a = isSignedIn ? console.log('') : <p onClick={() => onRouteChange('login')} className='alert pointer mb4 f3'>A rendeléshez be kell jelentkezned!</p>;
 	return(
 		<div>
 		{a}
