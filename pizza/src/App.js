@@ -7,6 +7,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
+import Particles from './components/Particles/Particles';
 
 class App extends React.Component {
   constructor(){
@@ -130,6 +131,7 @@ class App extends React.Component {
   render(){
     return(
       <div>
+      <Particles className='particles' />
       <Menu chooseCateg={this.listCategory} foodCategories={this.state.categories} checkLogin={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
       {
         this.state.route === 'home' || this.state.route === 'logout' ? 
