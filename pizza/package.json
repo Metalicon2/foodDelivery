@@ -12,6 +12,8 @@
     "npm": "^6.11.3",
     "particles.js": "^2.0.0",
     "react": "^16.9.0",
+    "react-alert": "^5.5.0",
+    "react-alert-template-basic": "^1.0.0",
     "react-awesome-slider": "^1.0.1",
     "react-dom": "^16.9.0",
     "react-particles-js": "^2.7.0",

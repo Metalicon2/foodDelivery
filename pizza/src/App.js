@@ -8,6 +8,13 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
 import Particles from './components/Particles/Particles';
+import AlertTemplate from 'react-alert-template-basic'
+import { positions, Provider } from "react-alert";
+
+const options = {
+  timeout: 5000,
+  position: positions.TOP_CENTER
+}
 
 class App extends React.Component {
   constructor(){
@@ -131,6 +138,7 @@ class App extends React.Component {
   render(){
     return(
       <div>
+      <Provider template={AlertTemplate} {...options}>
       <Particles className='particles' />
       <Menu chooseCateg={this.listCategory} foodCategories={this.state.categories} checkLogin={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
       {
@@ -155,6 +163,7 @@ class App extends React.Component {
         </div>
         )))))
       }
+      </Provider>
       </div>
     );
   }
