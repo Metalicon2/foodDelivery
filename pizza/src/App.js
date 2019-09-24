@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import FoodList from './components/Food/FoodList';
 import Scroll from './components/Scroll/Scroll';
 import Menu from './components/Menu/Menu';
@@ -9,164 +9,157 @@ import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
 import Particles from './components/Particles/Particles';
 import AlertTemplate from './components/Alert/AlertTemplate';
-import { transitions, positions, Provider } from 'react-alert';
+import { useAlert, transitions, positions, Provider } from 'react-alert';
 
-//Alert prompt options
-const options = {
-  timeout: 3000,
-  position: positions.TOP_CENTER,
-  transition: transitions.SCALE
-}
+const App = () => {
+  
+  //Setting state variables
+  const [foods, setFoods] = useState([]);
+  const [categories, setCategories] =  useState([]);
+  const [orders, setOrders] = useState([]);
+  const [user, setUser] = useState({});
+  const [route, setRoute] = useState('home');
+  const [isSignedIn, setIsSignedIn] =  useState(false);
+  const [category, setCategory] = useState('');
+  const [pay, setPay] = useState(0);
+  const [id, setId] = useState(0);
 
-class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      foods: [],
-      categories: [],
-      orders: [],
-      user: {},
-      route: 'home',
-      isSignedIn: false,
-      category: '',
-      pay: 0,
-      id: 0
-    }
+  //Alert prompt options
+  const options = {
+    timeout: 3000,
+    position: positions.TOP_CENTER,
+    transition: transitions.SCALE
   }
 
   //Kosárhoz hozzáadás
-  putCart = (foodname, price) => {
+  const putCart = (foodname, price) => {
+    if(price + pay >= 20000){
+      return alert('You cant put more items into the cart!');
+    }
     const res = window.confirm('You want to put this into the cart?');
     if(!res){
       return;
     }
-    if(this.state.pay + price >= 20000){
-      alert('You reached the order limit (20.000 Ft)');
-      return;
-    }
-    this.payBound(price);
-    this.setState(state => {
-      state.orders.push(
-        {
-          foodname: foodname,
-          price: price,
-          id: this.state.id
-        }
-      );
-    });
+    payBound(price);
+    setOrders([
+      ...orders,
+    {
+      foodname: foodname,
+      price: price,
+      id: id
+    }]);
   }
 
   //Kosár visszaállítása alaphelyzetbe
-  resetOrders = () => {
-    this.setState({orders: []});
+  const resetOrders = () => {
+    setOrders([]);
   }
 
   //Rendelés törlése
-  updateCart = (id, foodname, price) => {
+  const updateCart = (id, foodname, price) => {
     const res = window.confirm(`You want to delete this order: ${foodname}?`);
     if(!res){
       return;
     }
-    let orderItem = this.state.orders.find((item) => {
+    let orderItem = orders.find((item) => {
         return item.id === id;
     });
-    this.setState({pay: this.state.pay - orderItem.price});
-    const filteredCart = this.state.orders.filter((item) => {
+    setPay(pay - orderItem.price);
+    const filteredCart = orders.filter((item) => {
       return item.id !== id;
     });
-    this.setState({orders: filteredCart});
+    setOrders(filteredCart);
   }
 
-  payBound = (price) => {
-    this.setState({id: this.state.id + 1});
-    this.setState({pay: this.state.pay + price});
+  const payBound = (price) => {
+    setId(id + 1);
+    setPay(pay + price);
   }
 
-  loadUser = (user) => {
-    this.setState({user: user});
+  const loadUser = (user) => {
+    setUser(user);
   }
 
-  orderFood = () => { 
-    this.onRouteChange('order');
+  const orderFood = () => { 
+    onRouteChange('order');
   }
 
-  //menuitems lekérése adatbázisból
-  componentDidMount(){
-    fetch('https://otifoodapi.herokuapp.com/home', {
-      method: 'get',
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(res => res.json())
-    .then(data => {
-      this.setState({foods: data});
-      console.log(this.state.foods);
-      this.sortCategories();
-    });
+  async function fetchData() {
+    const res = await fetch('https://otifoodapi.herokuapp.com/home');
+    res
+      .json()
+      .then(res => {
+        setFoods(res);
+        sortCategories(res);
+      }
+      );
   }
+
+  useEffect(() => {
+    fetchData();
+    onRouteChange('home');
+  }, []);
 
   //ételkategóriák kiválogatása listába adatbázisból dinamikusan
-  sortCategories = () => {
-    let categories1 = [this.state.foods[0].category];
-    this.state.foods.sort((a,b) => {
+  const sortCategories = (foods) => {
+    let categories1 = [foods[0].category];
+    foods.sort((a,b) => {
       if(a.category.localeCompare(b.category) !== 0 && !categories1.includes(a.category)){
           categories1.push(a.category);
       }
     });
-    this.setState({categories: categories1});
+    setCategories(categories1);
   }
 
-  listCategory = (categ) => {
-    this.setState({category: categ});
+  const listCategory = (categ) => {
+    setCategory(categ);
   }
 
   //Routing
-  onRouteChange = (route) => {
+  const onRouteChange = (route) => {
     if(route === 'signedin'){
-      this.setState({isSignedIn: true});
-      this.setState({category: ''})
+      setIsSignedIn(true);
+      setCategory('');
     }else if(route === 'logout'){
       const res = window.confirm('Are you sure?');
       if(!res){return;}
-      this.setState({isSignedIn: false});
-      this.setState({orders: []});
-      this.setState({pay: 0});
+      setIsSignedIn(false);
+      setOrders([]);
+      setPay(0);
     }
-    this.setState({route: route});
+    setRoute(route);
   }
 
-  //Rendering
-  render(){
-    return(
+  return(
+    <div>
+    <Provider template={AlertTemplate} {...options}>
+    <Particles className='particles' />
+    <Menu chooseCateg={listCategory} foodCategories={categories} checkLogin={isSignedIn} onRouteChange={onRouteChange}/>
+    {
+      route === 'home' || route === 'logout' ? 
+        <Home />
+      :
+      (route === 'login' ? <Login loadUser={loadUser} onRouteChange={onRouteChange}/>
+      :
+      (route === 'register' ? <Register onRouteChange={onRouteChange}/> 
+      :
+      (route === 'signedin' ?
+        <Home />
+      :
+      (route === 'cart' ? <Cart orderFood={orderFood} updateCart={updateCart} orders={orders}/>
+      :
+      (route === 'order' ? <OrderForm resetOrders={resetOrders} orders={orders} onRouteChange={onRouteChange}/>
+      :
       <div>
-      <Provider template={AlertTemplate} {...options}>
-      <Particles className='particles' />
-      <Menu chooseCateg={this.listCategory} foodCategories={this.state.categories} checkLogin={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
-      {
-        this.state.route === 'home' || this.state.route === 'logout' ? 
-          <Home />
-        :
-        (this.state.route === 'login' ? <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-        :
-        (this.state.route === 'register' ? <Register onRouteChange={this.onRouteChange}/> 
-        :
-        (this.state.route === 'signedin' ?
-          <Home />
-        :
-        (this.state.route === 'cart' ? <Cart orderFood={this.orderFood} updateCart={this.updateCart} orders={this.state.orders}/>
-        :
-        (this.state.route === 'order' ? <OrderForm resetOrders={this.resetOrders} orders={this.state.orders} onRouteChange={this.onRouteChange}/>
-        :
-        <div>
-          <Scroll>
-            <FoodList payBound={this.payBound} putCart={this.putCart} onRouteChange={this.onRouteChange} foods={this.state.foods} categoryState={this.state.category} route={this.state.route} isSignedIn={this.state.isSignedIn}/>
-          </Scroll>
-        </div>
-        )))))
-      }
-      </Provider>
+        <Scroll>
+          <FoodList payBound={payBound} putCart={putCart} onRouteChange={onRouteChange} foods={foods} categoryState={category} route={route} isSignedIn={isSignedIn}/>
+        </Scroll>
       </div>
-    );
-  }
+      )))))
+    }
+    </Provider>
+    </div>
+  );
 }
 
 export default App;
