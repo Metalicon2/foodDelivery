@@ -8,12 +8,14 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
 import Particles from './components/Particles/Particles';
-import AlertTemplate from 'react-alert-template-basic'
-import { positions, Provider } from "react-alert";
+import AlertTemplate from './components/Alert/AlertTemplate';
+import { useAlert, transitions, positions, Provider } from 'react-alert';
 
+//Alert prompt options
 const options = {
-  timeout: 5000,
-  position: positions.TOP_CENTER
+  timeout: 3000,
+  position: positions.TOP_CENTER,
+  transition: transitions.SCALE
 }
 
 class App extends React.Component {
@@ -147,7 +149,7 @@ class App extends React.Component {
         :
         (this.state.route === 'login' ? <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
         :
-        (this.state.route === 'register' ? <Register onRouteChange={this.onRouteChange}/> 
+        (this.state.route === 'register' ? <Register myAlert={useAlert} onRouteChange={this.onRouteChange}/> 
         :
         (this.state.route === 'signedin' ?
           <Home />

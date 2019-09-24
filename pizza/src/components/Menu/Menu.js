@@ -1,7 +1,7 @@
 import React from 'react';
 import './Menu.css';
-import { InlineIcon } from "@iconify/react";
-import cartOutline from '@iconify/icons-mdi/cart-outline';
+//import { InlineIcon } from "@iconify/react";
+//import cartOutline from '@iconify/icons-mdi/cart-outline';
 
 
 const Menu = ({onRouteChange, checkLogin, foodCategories, chooseCateg}) => {
@@ -33,7 +33,6 @@ const Menu = ({onRouteChange, checkLogin, foodCategories, chooseCateg}) => {
         <a onClick={() => onRouteChange('cart')} 
             className="link-1 f4-l pointer">
               Cart 
-            <InlineIcon icon={cartOutline} />
         </a>
         <a onClick={() => onRouteChange('logout')} className="link-1 f4-l pointer" >Logout</a>
       </nav>

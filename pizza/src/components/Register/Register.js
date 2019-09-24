@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAlert } from "react-alert";
 
 class Register extends React.Component{
 	constructor(props){
@@ -11,7 +12,8 @@ class Register extends React.Component{
 
 	onSubmitRegister = () => {
 		if(this.isValidForm()){
-			return alert('Wrong format!');
+			this.props.myAlert().show('...');
+			return alert('wrong format!');
 		}
 		const {onRouteChange} = this.props;
 		fetch('https://otifoodapi.herokuapp.com/register', {
@@ -31,6 +33,10 @@ class Register extends React.Component{
 				onRouteChange('login');
 			}
 		});
+	}
+
+	myAlert = () => {
+		const alert = useAlert().show('...');
 	}
 
 	isValidForm = () => {

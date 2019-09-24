@@ -1,10 +1,9 @@
 import React from 'react';
 import './Food.css';
-import { InlineIcon } from '@iconify/react';
-import alertIcon from '@iconify/icons-mdi/alert';
-import greenSalad from '@iconify/icons-emojione/green-salad';
+//import { InlineIcon } from '@iconify/react';
+//import alertIcon from '@iconify/icons-mdi/alert';
+//import greenSalad from '@iconify/icons-emojione/green-salad';
 import { useAlert } from "react-alert";
-import Alert from '../Alert/Alert';
 
 const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, spicy, vegatarian}) => {
 	const alert = useAlert();
@@ -19,27 +18,23 @@ const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, s
 			</div>
 			{	
 					spicy === 1 && vegatarian === 1 ? 
-					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
-						<InlineIcon color='red' icon={alertIcon} />
-						<InlineIcon color='red' icon={greenSalad} />  
+					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
 							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
 					</h3>
 				:
 				(
 					spicy === 1 ?
-					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
-						<InlineIcon color='red' icon={alertIcon} />
+					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
 							<span className="tooltiptext f5">Fűszeres!</span>
 					</h3>
 				:
 				(
 					vegatarian === 1 ?
-					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
-						<InlineIcon color='red' icon={greenSalad} />
+					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
 							<span className="tooltiptext f5">Vegetáriánus!</span>
 					</h3>
 				:
-					<h3 className='b fw9 f4 pointer' onClick={() => alert.show("lol")}> {foodname} </h3>
+					<h3 onClick={() => alert.show("You have to log in to order!")} className='b fw9 f4 pointer'> {foodname} </h3>
 				)) 
 			}
 			<p className='price pa2'> {`${price} Ft`} </p>
