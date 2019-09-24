@@ -9,7 +9,7 @@ import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
 import Particles from './components/Particles/Particles';
 import AlertTemplate from './components/Alert/AlertTemplate';
-import { useAlert, transitions, positions, Provider } from 'react-alert';
+import { transitions, positions, Provider } from 'react-alert';
 
 //Alert prompt options
 const options = {
@@ -132,8 +132,6 @@ class App extends React.Component {
       this.setState({pay: 0});
     }
     this.setState({route: route});
-    console.log(this.state.orders);
-    console.log(this.state.pay);
   }
 
   //Rendering
@@ -149,7 +147,7 @@ class App extends React.Component {
         :
         (this.state.route === 'login' ? <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
         :
-        (this.state.route === 'register' ? <Register myAlert={useAlert} onRouteChange={this.onRouteChange}/> 
+        (this.state.route === 'register' ? <Register onRouteChange={this.onRouteChange}/> 
         :
         (this.state.route === 'signedin' ?
           <Home />

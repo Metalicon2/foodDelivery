@@ -5,7 +5,6 @@ import './Menu.css';
 
 
 const Menu = ({onRouteChange, checkLogin, foodCategories, chooseCateg}) => {
-  console.log(`user signed in: ${checkLogin}˙`);
   const dropDown = foodCategories.map((item, i) => {
     return(
       <p onClick={(event) => {chooseCateg(item); onRouteChange('category');}} key={i}>{item}</p>

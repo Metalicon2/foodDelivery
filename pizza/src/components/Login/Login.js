@@ -32,7 +32,6 @@ class Login extends React.Component{
 			})
 		}).then(res => res.json())
 		.then(data => {
-			console.log(data);
 			if(data === 'wrong password'){
 				alert('Wrong password!');
 			}else if(data === 'no such user'){

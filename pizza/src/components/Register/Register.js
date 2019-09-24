@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAlert } from "react-alert";
+//import { useAlert } from "react-alert";
 
 class Register extends React.Component{
 	constructor(props){
@@ -12,7 +12,6 @@ class Register extends React.Component{
 
 	onSubmitRegister = () => {
 		if(this.isValidForm()){
-			this.props.myAlert().show('...');
 			return alert('wrong format!');
 		}
 		const {onRouteChange} = this.props;
@@ -25,7 +24,6 @@ class Register extends React.Component{
 			})
 		}).then(res => res.json())
 		.then(data => {
-			console.log(data);
 			if(data === 'error'){
 				alert('User already exists!');
 			}else{
@@ -33,10 +31,6 @@ class Register extends React.Component{
 				onRouteChange('login');
 			}
 		});
-	}
-
-	myAlert = () => {
-		const alert = useAlert().show('...');
 	}
 
 	isValidForm = () => {
