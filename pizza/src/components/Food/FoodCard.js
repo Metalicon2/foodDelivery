@@ -7,6 +7,7 @@ import { useAlert } from "react-alert";
 
 const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, spicy, vegatarian}) => {
 	const alert = useAlert();
+	console.log(foodname.length)
 	return (
 		<div id='grow' className='dib tc br3 ma2 bw2 shadow-3'>
 			<div className="container">
@@ -18,23 +19,38 @@ const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, s
 			</div>
 			{	
 					spicy === 1 && vegatarian === 1 ? 
+					foodname.length < 25 ? 
 					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
+					</h3> :
+					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
 							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
 					</h3>
 				:
 				(
-					spicy === 1 ?
+					spicy === 1 ? 
+					foodname.length < 25 ? 
 					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
-							<span className="tooltiptext f5">Fűszeres!</span>
+							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
+					</h3> :
+					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
 					</h3>
 				:
 				(
 					vegatarian === 1 ?
+					foodname.length < 25 ? 
 					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
-							<span className="tooltiptext f5">Vegetáriánus!</span>
+							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
+					</h3> :
+					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
 					</h3>
 				:
-					<h3 onClick={() => alert.show("You have to log in to order!")} className='b fw9 f4 pointer'> {foodname} </h3>
+					foodname.length < 25 ? 
+					<h3 onClick={() => alert.show("You have to log in to order!")} className='b fw9 f4 pointer'> {foodname}
+					</h3> :
+					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} onClick={() => alert.show("You have to log in to order!")} className='b fw9 f4 pointer'> {foodname} </h3>
 				)) 
 			}
 			<p className='price pa2'> {`${price} Ft`} </p>

@@ -108,7 +108,7 @@ class App extends React.Component {
   sortCategories = () => {
     let categories1 = [this.state.foods[0].category];
     this.state.foods.sort((a,b) => {
-      if(a.category.localeCompare(b.category) !== 0){
+      if(a.category.localeCompare(b.category) !== 0 && !categories1.includes(a.category)){
           categories1.push(a.category);
       }
     });
