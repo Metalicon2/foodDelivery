@@ -8,10 +8,9 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
 import Particles from './components/Particles/Particles';
-import AlertTemplate from './components/Alert/AlertTemplate';
-import { useAlert, transitions, positions, Provider } from 'react-alert';
+import { withAlert } from 'react-alert';
 
-const App = () => {
+const App = ({alert}) => {
   
   //Setting state variables
   const [foods, setFoods] = useState([]);
@@ -24,17 +23,10 @@ const App = () => {
   const [pay, setPay] = useState(0);
   const [id, setId] = useState(0);
 
-  //Alert prompt options
-  const options = {
-    timeout: 3000,
-    position: positions.TOP_CENTER,
-    transition: transitions.SCALE
-  }
-
   //Kosárhoz hozzáadás
   const putCart = (foodname, price) => {
     if(price + pay >= 20000){
-      return alert('You cant put more items into the cart!');
+      return alert.show('You cannot put more items into the Cart!');
     }
     const res = window.confirm('You want to put this into the cart?');
     if(!res){
@@ -116,23 +108,32 @@ const App = () => {
   }
 
   //Routing
-  const onRouteChange = (route) => {
-    if(route === 'signedin'){
-      setIsSignedIn(true);
+  const onRouteChange = (thisroute) => {
+    if(thisroute === 'signedin'){
+      alert.success('You have logged in succesfully!', {
+        onClose: () => {
+          setIsSignedIn(true);
+          setRoute(thisroute);
+        }
+      });
       setCategory('');
-    }else if(route === 'logout'){
+    }else if(thisroute === 'logout'){
       const res = window.confirm('Are you sure?');
       if(!res){return;}
-      setIsSignedIn(false);
       setOrders([]);
       setPay(0);
+      alert.success('You have logged out!', {        
+        onClose: () => {
+         setIsSignedIn(false);
+         setRoute(thisroute);
+      }});
+    }else{
+      setRoute(thisroute);
     }
-    setRoute(route);
-  }
+}
 
   return(
     <div>
-    <Provider template={AlertTemplate} {...options}>
     <Particles className='particles' />
     <Menu chooseCateg={listCategory} foodCategories={categories} checkLogin={isSignedIn} onRouteChange={onRouteChange}/>
     {
@@ -157,9 +158,8 @@ const App = () => {
       </div>
       )))))
     }
-    </Provider>
     </div>
   );
 }
 
-export default App;
+export default withAlert()(App);

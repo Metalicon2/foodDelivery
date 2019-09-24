@@ -26,7 +26,6 @@ const Login = ({onRouteChange, loadUser}) => {
 			}else if(data === 'no such user'){
 				alert.error('You dont have an account!');
 			}else{
-				alert.success('You have signed in!');
 				onRouteChange('signedin');
 				loadUser({
 					email: email,
