@@ -3,10 +3,8 @@ import './Food.css';
 import { InlineIcon } from '@iconify/react';
 import alertIcon from '@iconify/icons-mdi/alert';
 import greenSalad from '@iconify/icons-emojione/green-salad';
-import { useAlert } from "react-alert";
 
 const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, spicy, vegatarian}) => {
-	const alert = useAlert();
 	return (
 		<div id='grow' className='dib tc br3 ma2 bw2 shadow-3'>
 			<div className="container">
@@ -18,7 +16,7 @@ const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, s
 			</div>
 			{	
 					spicy === 1 && vegatarian === 1 ? 
-					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
 							<InlineIcon color='red' icon={alertIcon} />
 							<InlineIcon color='red' icon={greenSalad} />  
 							<span className="tooltiptext f5">Fűszeres és vegetáriánus!</span>
@@ -27,11 +25,11 @@ const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, s
 				(
 					spicy === 1 ? 
 					foodname.length < 25 ? 
-					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
 							<InlineIcon color='red' icon={alertIcon} />
 							<span className="tooltiptext f5">Fűszeres!</span>
 					</h3> :
-					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} className='tooltip b fw9 f4 pointer'> {foodname} 
 							<InlineIcon color='red' icon={alertIcon} />
 							<span className="tooltiptext f5">Fűszeres!</span>
 					</h3>
@@ -39,19 +37,19 @@ const FoodCard = ({foodname, description, price, src, isSignedIn, putCart, id, s
 				(
 					vegatarian === 1 ?
 					foodname.length < 25 ? 
-					<h3 onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+					<h3 className='tooltip b fw9 f4 pointer'> {foodname} 
 							<InlineIcon color='red' icon={greenSalad} />
 							<span className="tooltiptext f5">Vegetáriánus!</span>
 					</h3> :
-					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} onClick={() => alert.show("You have to log in to order!")} className='tooltip b fw9 f4 pointer'> {foodname} 
+					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} className='tooltip b fw9 f4 pointer'> {foodname} 
 							<InlineIcon color='red' icon={greenSalad} />
 							<span className="tooltiptext f5">Vegetáriánus!</span>
 					</h3>
 				:
 					foodname.length < 25 ? 
-					<h3 onClick={() => alert.show("You have to log in to order!")} className='b fw9 f4 pointer'> {foodname}
+					<h3 className='b fw9 f4 pointer'> {foodname}
 					</h3> :
-					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} onClick={() => alert.show("You have to log in to order!")} className='b fw9 f4 pointer'> {foodname} </h3>
+					<h3 style={{overflow: 'hidden', width: '220px', marginTop: '9px', marginBottom: '9px'}} className='b fw9 f4 pointer'> {foodname} </h3>
 				)) 
 			}
 			<p className='price pa2'> {`${price} Ft`} </p>
