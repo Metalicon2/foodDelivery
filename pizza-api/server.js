@@ -50,14 +50,27 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/order', (req, res) => {
+	let orders = [];
+	for(let i = 0; i < req.body.foodname.length; i++){
+		orders.push({
+			name: req.body.name,
+			location: req.body.location,
+			phonenumber: req.body.phonenumber,
+			foodname: req.body.foodname[i].foodname,
+			price: req.body.price[i].price
+		})
+	}
+
+	const fieldsToInsert = orders.map(item => 
+  	({ 
+  		name: item.name,
+		location: item.location,
+		phonenumber: item.phonenumber,
+		foodname: item.foodname,
+		price: item.price })
+	); 
 	knex('orders')
-	.insert({
-		name: req.body.name,
-		location: req.body.location,
-		phonenumber: req.body.phonenumber,
-		foodname: req.body.foodname,
-		price: req.body.price
-	})
+	.insert(fieldsToInsert)
 	.then(data => res.json(data))
 	.catch(err => res.status(400).json('error'));
 });

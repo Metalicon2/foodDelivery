@@ -32,8 +32,8 @@ const OrderForm = ({onRouteChange, orders, resetOrders, alert}) => {
 	        name: name,
 	        location: location,
 	        phonenumber: phonenumber,
-	        foodname: orders[0].foodname,
-	        price: orders[0].price
+	        foodname: orders.map(item => ({ foodname: item.foodname })),
+	        price: orders.map(item => ({ price: item.price }))
 	      })
 	    })
 	    .then(res => res.json())
@@ -87,6 +87,7 @@ const OrderForm = ({onRouteChange, orders, resetOrders, alert}) => {
 			        	name="phone"  
 			        	id="phone"
 			        	onChange={onPhoneNumberChange}
+			        	placeholder='+3612345678'
 			        	/>
 			      </div>
 			    </fieldset>

@@ -74,7 +74,7 @@ const App = ({alert}) => {
   }
 
   const orderFood = () => { 
-    onRouteChange('order');
+    orders.length === 0 ? alert.show('The cart is empty!') : onRouteChange('order');
   }
 
   async function fetchData() {

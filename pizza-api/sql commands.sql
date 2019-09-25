@@ -6,7 +6,8 @@ CREATE TABLE orders (
     location VARCHAR(100) NOT NULL,
 	phonenumber VARCHAR(50) NOT NULL,
 	foodname VARCHAR(50) NOT NULL,
-	price VARCHAR(50) NOT NULL
+	price VARCHAR(50) NOT NULL,
+	time timestamp with time zone default current_timestamp
 );
 
 DROP TABLE IF EXISTS users;
@@ -14,7 +15,8 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id serial PRIMARY KEY,
     email text UNIQUE NOT NULL,
-	hash VARCHAR(100) NOT NULL
+    hash VARCHAR(100) NOT NULL,
+    joined timestamp with time zone default current_timestamp
 );
 
 DROP TABLE IF EXISTS MenuItems;
