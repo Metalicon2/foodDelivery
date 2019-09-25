@@ -38,12 +38,12 @@ const OrderForm = ({onRouteChange, orders, resetOrders, alert}) => {
 	    })
 	    .then(res => res.json())
 	    .then(data => {
+	    	console.log(data);
 	    	if(data === 'error'){
 				alert.error('Something went wrong sending your orders!');
 			}else{
 				alert.success('Succesful order!');
-				onRouteChange('home');
-				resetOrders();
+				onRouteChange('orders');
 			}
 		});
 	}

@@ -8,6 +8,7 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
 import Particles from './components/Particles/Particles';
+import Orders from './components/Orders/Orders';
 import { withAlert } from 'react-alert';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
@@ -107,12 +108,17 @@ const App = ({alert}) => {
   const listCategory = (categ) => {
     setCategory(categ);
   }
-
   //Routing
   const onRouteChange = (thisroute) => {
+    if(thisroute === 'orders'){
+      setTimeout(() => {
+        onRouteChange('home');
+        resetOrders();
+      },10000);
+    }
     if(thisroute === 'signedin'){
       alert.success('You have logged in!', {
-        timeout: 5000,
+        timeout: 3000,
         onOpen: () => {
           toggleBlocking(true);
         },
@@ -161,12 +167,14 @@ const App = ({alert}) => {
       :
       (route === 'order' ? <OrderForm resetOrders={resetOrders} orders={orders} onRouteChange={onRouteChange}/>
       :
+      (route === 'orders' ? <Orders orders={orders}/>
+      : 
       <div>
         <Scroll>
           <FoodList payBound={payBound} putCart={putCart} onRouteChange={onRouteChange} foods={foods} categoryState={category} route={route} isSignedIn={isSignedIn}/>
         </Scroll>
       </div>
-      )))))
+      ))))))
     }
     </BlockUi>
   );
