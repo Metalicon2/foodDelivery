@@ -13,7 +13,8 @@ const alertStyle = {
   boxSizing: 'border-box',
   fontSize: '15px',
   position: 'relative',
-  fontFamily: 'Oswald'
+  fontFamily: 'Oswald',
+  zIndex: '20000'
 }
 
 const contentWrapperStyle = {

@@ -6,8 +6,8 @@ const OrderForm = ({onRouteChange, orders, resetOrders, alert}) => {
 	const [name, setName] = useState('');
 	const [location, setLocation] = useState('');
 	const [phonenumber, setPhonenumber] = useState('');
-	const [foodname, setFoodname] = useState('');
-	const [price, setPrice] = useState('');
+	//const [foodname, setFoodname] = useState('');
+	//const [price, setPrice] = useState('');
 
 	const onNameChange = (event) => {
 		setName(event.target.value);

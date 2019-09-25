@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
-import { useAlert, transitions, positions, Provider as AlertProvider } from 'react-alert';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from './components/Alert/AlertTemplate';
 
 const options = {
@@ -19,7 +19,7 @@ const Root = () => (
   </AlertProvider>
 )
 
-ReactDOM.render(<Root/>, document.getElementById('root'));
+ReactDOM.render(<Root />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

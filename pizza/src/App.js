@@ -9,9 +9,11 @@ import Cart from './components/Cart/Cart';
 import OrderForm from './components/OrderForm/OrderForm';
 import Particles from './components/Particles/Particles';
 import { withAlert } from 'react-alert';
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
 
 const App = ({alert}) => {
-  
+
   //Setting state variables
   const [foods, setFoods] = useState([]);
   const [categories, setCategories] =  useState([]);
@@ -22,16 +24,18 @@ const App = ({alert}) => {
   const [category, setCategory] = useState('');
   const [pay, setPay] = useState(0);
   const [id, setId] = useState(0);
+  const [blocking, setBlocking] = useState(false);
+
+  const toggleBlocking = (param) => {
+    setBlocking(param);
+  }
 
   //Kosárhoz hozzáadás
   const putCart = (foodname, price) => {
     if(price + pay >= 20000){
-      return alert.show('You cannot put more items into the Cart!');
+      return alert.error('You cannot put more items into the Cart!');
     }
-    const res = window.confirm('You want to put this into the cart?');
-    if(!res){
-      return;
-    }
+    alert.success(`${foodname} has been put into the cart!`);
     payBound(price);
     setOrders([
       ...orders,
@@ -49,10 +53,7 @@ const App = ({alert}) => {
 
   //Rendelés törlése
   const updateCart = (id, foodname, price) => {
-    const res = window.confirm(`You want to delete this order: ${foodname}?`);
-    if(!res){
-      return;
-    }
+    alert.success(`${foodname} has been removed from the cart!`);
     let orderItem = orders.find((item) => {
         return item.id === id;
     });
@@ -94,13 +95,13 @@ const App = ({alert}) => {
 
   //ételkategóriák kiválogatása listába adatbázisból dinamikusan
   const sortCategories = (foods) => {
-    let categories1 = [foods[0].category];
+    let myCategories = [foods[0].category];
     foods.sort((a,b) => {
-      if(a.category.localeCompare(b.category) !== 0 && !categories1.includes(a.category)){
-          categories1.push(a.category);
+      if(a.category.localeCompare(b.category) !== 0 && !myCategories.includes(a.category)){
+          myCategories.push(a.category);
       }
     });
-    setCategories(categories1);
+    setCategories(myCategories);
   }
 
   const listCategory = (categ) => {
@@ -110,10 +111,15 @@ const App = ({alert}) => {
   //Routing
   const onRouteChange = (thisroute) => {
     if(thisroute === 'signedin'){
-      alert.success('You have logged in succesfully!', {
+      alert.success('You have logged in!', {
+        timeout: 5000,
+        onOpen: () => {
+          toggleBlocking(true);
+        },
         onClose: () => {
           setIsSignedIn(true);
           setRoute(thisroute);
+          toggleBlocking(false);
         }
       });
       setCategory('');
@@ -122,10 +128,14 @@ const App = ({alert}) => {
       if(!res){return;}
       setOrders([]);
       setPay(0);
-      alert.success('You have logged out!', {        
+      alert.success('You have logged out!', {    
+        onOpen: () => {
+          toggleBlocking(true);
+        },   
         onClose: () => {
          setIsSignedIn(false);
          setRoute(thisroute);
+         toggleBlocking(false);
       }});
     }else{
       setRoute(thisroute);
@@ -133,7 +143,7 @@ const App = ({alert}) => {
 }
 
   return(
-    <div>
+    <BlockUi style={{zIndex: '-1', height: '100vh'}} blocking={blocking}>
     <Particles className='particles' />
     <Menu chooseCateg={listCategory} foodCategories={categories} checkLogin={isSignedIn} onRouteChange={onRouteChange}/>
     {
@@ -158,7 +168,7 @@ const App = ({alert}) => {
       </div>
       )))))
     }
-    </div>
+    </BlockUi>
   );
 }
 
